@@ -1,4 +1,15 @@
+# ansible debian1 -i inventory -m setup > debian1.txt
+
 - hosts: all
+  vars:
+    fruits:
+      - bananes
+      - citrons
+      - kiwis
+    voiture:
+      modele: twingo
+      puissance: 60
+
   tasks:
     - name: On s'assure que nos machines soient up
       ping:
@@ -8,6 +19,8 @@
         name: apache2
         state: present
       become: true
+      when: '"mes_debians" in group_names'
+      #when: ansible_os_family == 'Debian'
   
     - name: On affiche un message
       debug:
