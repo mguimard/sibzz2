@@ -1,4 +1,4 @@
-debian1 ansible_ssh_host=192.168.56.11 une_variable=hello
+debian1 ansible_ssh_host=192.168.56.11 une_variable=hello web_server=haproxy
 centos1 ansible_ssh_host=192.168.56.12 une_variable=goodbye
 
 [mes_debians]
@@ -6,3 +6,9 @@ debian1
 
 [mes_centos]
 centos1
+
+[mes_debians:vars]
+web_server=apache2
+
+[mes_centos:vars]
+web_server=httpd

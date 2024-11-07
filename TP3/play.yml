@@ -12,17 +12,10 @@
         group: root
         mode: '0644'
 
-    - name: Make sure apache2 is installed on debians
-      ansible.builtin.apt:
-        name: apache2
+    - name: Make sure the web server is installed on debians
+      ansible.builtin.package:
+        name: "{{ web_server }}"
         state: present
-      when: ansible_os_family == 'Debian'
-
-    - name: Make sure httpd is installed on centos
-      ansible.builtin.dnf:
-        name: httpd
-        state: present
-      when: ansible_os_family == 'RedHat'
 
     - name: Make sure the html file is copied
       ansible.builtin.copy:
@@ -32,14 +25,8 @@
         group: root
         mode: '0644'
 
-    - name: Make sure apache2 is started
+    - name: Make sure the web server is started
       ansible.builtin.service:
-        name: apache2
+        name: "{{ web_server }}"
         state: started
-      when: ansible_os_family == 'Debian'
-
-    - name: Make sure httpd is started
-      ansible.builtin.service:
-        name: httpd
-        state: started
-      when: ansible_os_family == 'RedHat'
+        enabled: true
