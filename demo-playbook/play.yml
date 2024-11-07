@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+    - name: On s'assure que nos machines soient up
+      ping:
+
+    - name: Make sure apache2 is installed
+      apt:
+        name: apache2
+        state: present
+      become: true
+  
+    - name: On affiche un message
+      debug:
+        msg: Fin de playbook
