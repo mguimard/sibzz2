@@ -6,3 +6,7 @@ debian1
 
 [mes_centos]
 centos1
+
+[mes_machines:children]
+mes_debians
+mes_centos
