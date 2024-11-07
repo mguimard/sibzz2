@@ -1,0 +1,19 @@
+- name: Exemple de template
+  hosts: all
+  become: true
+  tasks:
+    - name: On s'assure de déposer notre conf
+      ansible.builtin.template:
+        src: config.j2
+        dest: /etc/my-super-config
+        owner: root
+        group: root
+        mode: '0644'
+      register: template_result
+
+    - name: On s'assure que notre service apache redémarre
+      ansible.builtin.service:
+        name: "{{ web_server }}"
+        state: restarted
+      when: template_result is changed
+

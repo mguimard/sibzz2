@@ -1,0 +1,4 @@
+HOSTNAME={{ ansible_hostname | lower }}
+OS={{ ansible_os_family | upper | hash('sha1')}}
+WEB_SERVER={{ web_server }}
+NEW_CONF=hello

@@ -1,27 +1,38 @@
 # ansible debian1 -i inventory -m setup > debian1.txt
 
-- hosts: all
+- name: On affiche une variable
+  hosts: all
   vars:
-    fruits:
-      - bananes
-      - citrons
-      - kiwis
-    voiture:
-      modele: twingo
-      puissance: 60
-
+    app_deploy_folder: /coucou
+  vars_files:
+    - my-vars.yml
   tasks:
-    - name: On s'assure que nos machines soient up
-      ping:
 
-    - name: Make sure apache2 is installed
-      apt:
-        name: apache2
-        state: present
+    - name: This is a block
+      when: une_condition
       become: true
-      when: '"mes_debians" in group_names'
-      #when: ansible_os_family == 'Debian'
-  
-    - name: On affiche un message
-      debug:
-        msg: Fin de playbook
+      vars:
+        # lvl 16
+        some_var: some value
+      block:
+        - name: Task 1
+          ansible.builtin.ping:
+        - name: Task 2
+          ansible.builtin.ping:
+
+
+
+
+    - name: Affichage en mode "var"
+      ansible.builtin.debug:
+        var: app_deploy_folder
+
+    - ansible.builtin.include_vars:
+        file: my-vars.yml #18
+    
+    - name: Affichage en mode "msg"
+      ansible.builtin.debug:
+        msg: "{{ app_deploy_folder | default('/path/to/somewhere') }}"
+      when: app_deploy_folder is defined
+      vars:
+        app_deploy_folder: /lvl-17
