@@ -11,7 +11,3 @@ centos1
 mes_debians
 mes_centos
 
-[mes_debians:vars]
-web_server=apache2
-[mes_centos:vars]
-web_server=httpd

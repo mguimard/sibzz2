@@ -1,6 +1,26 @@
 - name: Exemple de template
   hosts: all
   become: true
+  gather_facts: false
+
+  vars:
+    courses:
+      - pizzas
+      - bières
+      - bières
+      - cacahuetes
+
+
+    magasins:
+      leclerc:
+        employes:
+          - alice
+          - bob
+      superU:
+        employes:
+          - joe
+          - robert
+
   tasks:
     - name: On s'assure de déposer notre conf
       ansible.builtin.template:

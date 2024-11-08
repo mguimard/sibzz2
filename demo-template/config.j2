@@ -1,4 +1,19 @@
-HOSTNAME={{ ansible_hostname | lower }}
-OS={{ ansible_os_family | upper | hash('sha1')}}
 WEB_SERVER={{ web_server }}
 NEW_CONF=hello
+DATABASE_URL={{ hostvars.centos1.ansible_ssh_host }}
+{% if afficher_courses %}
+{% for nourriture in courses | unique | sort  %}
+Acheter: {{ nourriture | capitalize }}
+{% endfor %}
+{% else %}
+Pas d'affichage des courses
+{% endif %}
+{# ceci est un commentaire #}
+# ceci n'est pas un commentaire
+
+{% for name, magasin in magasins | items  %}
+Employés de {{ name }} :
+{% for employe in magasin.employes | sort | unique %}
+ - {{ employe | capitalize }}
+{% endfor %}
+{% endfor %}
