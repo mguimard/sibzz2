@@ -1,0 +1,13 @@
+- hosts: all
+  tasks:
+    - name: On s'assure que git soit présent
+      package:
+        name: git
+        state: present
+      register: retour_module
+      become: true
+
+    - name: Affichage du retour du module
+      debug:
+        var: retour_module
+
