@@ -7,7 +7,7 @@ Le but de ce TP est de savoir utiliser ansible-vault pour chiffrer/déchiffrer d
 Créer un fichier yaml et y mettre quelques variables, exemple:
 
 ```
-port: 8080
+app_port: 8080
 app_name: my-app
 password: 1234
 ```
