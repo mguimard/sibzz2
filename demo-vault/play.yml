@@ -1,0 +1,14 @@
+- hosts: all
+  vars_files:
+    - my-vars.yml
+  tasks:
+    - name: Affichage du super mot de passe
+      debug:
+        var: my_super_secret
+    - name: Affichage de l'autre mdp
+      debug:
+        var: my_super_secret_2
+          
+# ansible-playbook -i inventory play.yml --ask-vault-pass
+# ansible-playbook -i inventory play.yml --vault-id some_label_1@prompt --vault-id some_other_label@prompt
+# ansible-playbook -i inventory play.yml --vault-id some_label_1@mdp1 --vault-id some_other_label@mdp2

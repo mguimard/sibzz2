@@ -1,0 +1,20 @@
+- name: Demo lookups
+  hosts: all
+  
+  vars:
+    todo: "{{ lookup('url', 'https://jsonplaceholder.typicode.com/todos/1', split_lines=False) }}"
+  tasks:
+
+    - name: Affichage d'un JSON venu d'internet
+      debug:
+        var: todo
+
+    - name: Affichage de l'objet
+      debug:
+        var: todo.title
+
+    - name: Affichage d'une vache
+      debug:
+        msg: "{{ lookup('pipe', 'cowsay hello {{ ansible_hostname }}') }}"
+
+

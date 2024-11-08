@@ -1,0 +1,33 @@
+# --tags "install"
+# --tags "config"
+# --tags "install,config"
+
+# --skip-tags "install"
+#
+
+# --tags tagged
+# --tags untagged
+# --skip-tags tagged
+# --skip-tags untagged
+#
+#
+# ansible-playbook -i inventory play.yml \
+#  --tags install --limit mes_debians,centos1,arch33
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Make sure git is installed
+      package:
+        name: git
+        state: present
+      tags:
+        - install
+
+    - name: Make sure motd is copied
+      copy:
+        content: hello
+        dest: /etc/motd
+      tags:
+        - config

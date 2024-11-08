@@ -1,0 +1,26 @@
+- hosts: all
+  become: true
+  vars:
+    mysql_root_username: root
+    mysql_root_password: 1234
+    mysql_databases:
+      - name: my_db1
+      - name: my_db2
+  
+    zabbix_server_database: mysql
+    zabbix_server_database_long: mysql
+    zabbix_server_dbport: 3306
+    zabbix_server_dbhost: localhost
+    zabbix_server_dbhost_run_install: false
+    zabbix_server_dbpassword: "{{ mysql_root_password }}"
+    zabbix_server_privileged_host: '%'
+    zabbix_server_mysql_login_host: localhost
+    zabbix_server_mysql_login_user: root
+    zabbix_server_mysql_login_password: "{{ mysql_root_password }}"
+    zabbix_server_mysql_login_port: 3306
+
+
+  roles:
+    - community.zabbix.zabbix_server
+    - geerlingguy.mysql
+    

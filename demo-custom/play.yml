@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+
+    - name: Utilisation d'une fonction python
+      debug:
+        msg: "{{ 'there is no place like localhost' | replace_localhost  }}"
+
+    - name: Utilisation d'un module custom
+      # utilisation de library/my-module.py
+      my-module:
+        my_arg: hello
+        my_arg_2: something
