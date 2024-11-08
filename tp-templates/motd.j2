@@ -14,7 +14,7 @@ Noyau: {{ ansible_kernel }}
 Gestionnaire de paquets: {{ ansible_pkg_mgr }}
 Gestionnaire de services: {{ ansible_service_mgr }}
 Nombre de paquets installés: {{ ansible_facts.packages | length }}
-Nombre de services: {{ ansible_facts.services | length }}
+Nombre de services: {{ ansible_facts.services | length }}
 
 Liste DNS:
 {% for dns in ansible_dns.nameservers %}
@@ -23,13 +23,15 @@ Liste DNS:
 
 Interfaces réseau:
 {% for intf in ansible_interfaces | sort %}
-- {{ intf }}: {{ ansible_facts[intf].ipv4.address }}
+- {{ intf }}: {{ ansible_facts[intf].ipv4.address | default('')}}
+- {{ intf }}: {{ ansible_eth0.ipv4.address }}
+- {{ intf }}: {{ ansible_facts['eth0'].ipv4.address }}
 {% endfor %}
 
 Partitions disques:
 {% for diskname, disk in ansible_devices | items %}
 - {{ diskname }}
-{% for partname, part in disk.partitions | items %}
+{% for partname, part in disk.partitions | items %}
   - {{ partname }}: {{ part.size }}
 {% endfor %}
 {% endfor %}

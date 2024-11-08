@@ -11,7 +11,7 @@
       ansible.builtin.service_facts:
 
     - name: Affichage des facts
-      debug:
+      ansible.builtin.debug:
         var: ansible_facts
 
     - name: On s'assure de déposer notre motd
@@ -21,4 +21,3 @@
         owner: root
         group: root
         mode: '0644'
-
