@@ -1,0 +1,37 @@
+Bienvenue sur le serveur {{ ansible_hostname }}
+Bienvenue sur le serveur {{ ansible_facts.hostname }}
+Bienvenue sur le serveur {{ ansible_facts['hostname'] }}
+Bienvenue sur le serveur {{ ansible_facts[some_var] }}
+{% if some_var is defined %}
+{{ some_var }}
+{% endif %}
+{{ some_var | default('valeur défaut') }}
+{{ some_var_not_existing | default(some_var) }}
+
+OS: {{ ansible_distribution }}
+Version: {{ ansible_distribution_version }}
+Noyau: {{ ansible_kernel }}
+Gestionnaire de paquets: {{ ansible_pkg_mgr }}
+Gestionnaire de services: {{ ansible_service_mgr }}
+Nombre de paquets installés: {{ ansible_facts.packages | length }}
+Nombre de services: {{ ansible_facts.services | length }}
+
+Liste DNS:
+{% for dns in ansible_dns.nameservers %}
+- {{ dns }}
+{% endfor %}
+
+Interfaces réseau:
+{% for intf in ansible_interfaces | sort %}
+- {{ intf }}: {{ ansible_facts[intf].ipv4.address }}
+{% endfor %}
+
+Partitions disques:
+{% for diskname, disk in ansible_devices | items %}
+- {{ diskname }}
+{% for partname, part in disk.partitions | items %}
+  - {{ partname }}: {{ part.size }}
+{% endfor %}
+{% endfor %}
+
+Motd généré le {{ ansible_date_time.iso8601 }}

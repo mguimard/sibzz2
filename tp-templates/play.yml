@@ -1,0 +1,24 @@
+- name: Exemple de template
+  hosts: all
+  become: true
+  vars:
+    some_var: hostname
+  tasks:
+    - name: Collecte des infos des paquets
+      ansible.builtin.package_facts:
+
+    - name: Collecte des infos des services
+      ansible.builtin.service_facts:
+
+    - name: Affichage des facts
+      debug:
+        var: ansible_facts
+
+    - name: On s'assure de déposer notre motd
+      ansible.builtin.template:
+        src: motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: '0644'
+
