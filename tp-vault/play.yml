@@ -1,0 +1,10 @@
+- hosts: all
+  vars_files:
+    - my-vars.yml
+  tasks:
+    - debug:
+        var: item
+      loop:
+        - "{{ app_port }}"
+        - "{{ app_name }}"
+        - "{{ password }}"

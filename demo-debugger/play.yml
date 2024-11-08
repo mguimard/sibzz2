@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+    - name: task 1
+      debug:
+        msg: hello playbook
+
+    - name: task 2
+      debug:
+        msg: middle of playbook
+      #debugger: always
+
+    - pause:
+        
+    - name: task 3
+      debug:
+        msg: Fin de playbook
+
+
